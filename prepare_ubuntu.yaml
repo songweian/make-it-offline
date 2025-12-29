@@ -1,0 +1,8 @@
+os: ubuntu
+os_version: 22.04
+arch: x86_64
+packages:
+  - wget:
+      deploy: deb
+      version: latest
+

@@ -1,0 +1,11 @@
+os: centos
+os_version: 10
+arch: x86_64
+packages:
+  - wget:
+      deploy: rpm
+      version: latest
+  - nginx:
+      deploy: docker
+      version: latest
+
