@@ -1,6 +1,27 @@
-# Make It Offline - 离线安装包生成器
+# Make It Offline - 离线安装包生成器 (Go 版)
 
-本项目旨在简化为不同平台和格式创建离线安装包的过程。
+本项目旨在简化为不同平台和格式创建离线安装包的过程。现已转变为纯 CLI 工具。
+
+## 使用方法
+
+### CLI 使用
+
+1. 编译 CLI:
+   ```bash
+   go build -o make-it-offline cmd/cli/main.go
+   ```
+
+2. 运行 CLI:
+   ```bash
+   ./make-it-offline nginx@1.21 ubuntu-20.04-x86_64 docker-compose
+   ```
+
+## 架构
+
+- `cmd/cli/`: 命令行工具。
+- `pkg/plugins/`: 插件框架目录（接口及基类）。
+- `repos/`: 插件实现仓库，每个应用一个目录。
+- `pkg/utils/`: 通用工具函数。
 
 ## 功能
 
@@ -12,81 +33,10 @@
 - **一键安装**: 生成的离线包内置一键安装脚本
 - **支持安装的应用**
   - nginx
-  - penpot
   - postgresql
-  - mattermost
-  - ONLYOFFICE
-  - wiki.js
-  - nextcloud
-  - jenkins
   - redis
-  - kafka
-  - rocketmq
-  - elastic
-  - grafana
-  - prometheus
-  - zabbix
-  - harbor
-  - gitlab
-  - jenkins
-  - sonarqube
-  - nexus 
-  - harbor
-  - minio 
-  - zookeeper
-  - redis 
-  - zookeeper
+  - mattermost
   - mysql
-  - mongodb
-  - rabbitmq
-
-## 目录结构
-
-```
-.
-├── README.md               # 本文档
-├── prepare_package.sh      # 离线包生成主脚本
-├── output/                   # 生成的离线安装包存放目录
-└── scripts/                  # 各类辅助脚本
-    ├── prepare_docker_compose.sh
-    ├── prepare_rpm.sh
-    └── prepare_deb.sh
-```
-
-## 如何使用
-
-### 1. 首次设置
-
-在第一次运行之前，请确保主脚本是可执行的：
-
-```bash
-chmod +x prepare_package.sh
-```
-
-### 2. 生成离线包
-
-执行 `prepare_package.sh` 脚本并提供所需参数。
-
-**参数:**
-
-1. `ARCH`: 架构 (`x86_64` 或 `arm`)
-2. `TYPE`: 安装方式 (`docker-compose`, `rpm`, 或 `deb`)
-3. `APP_NAME`: 应用名称
-4. `APP_VERSION`: 应用版本
-
-**示例 (使用 Docker Compose):**
-
-```bash
-./prepare_package.sh x86_64 docker-compose my-app 1.0.0
-```
-
-### 3. 在目标服务器上安装
-
-1. 将 `output/` 目录中生成的 `.tar.gz` 包传输到目标服务器。
-2. 解压并执行内置的安装脚本。
-
-```bash
-tar -zxvf my-app-1.0.0-x86_64-offline.tar.gz
-cd my-app-1.0.0
-./install.sh
-```
+  - prometheus
+  - grafana
+  - (更多应用正在移植中...)

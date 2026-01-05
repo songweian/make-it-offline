@@ -1,8 +1,0 @@
-os: windows
-os_version: 10
-arch: x86_64
-packages:
-  - wget:
-      deploy: exe
-      version: latest
-
