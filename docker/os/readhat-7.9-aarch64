@@ -1,1 +1,6 @@
 FROM centos:7.9.2009
+
+RUN yum update -y && \
+    yum install -y yum-utils epel-release && \
+    yum groupinstall -y "Development Tools" && \
+    yum clean all
